@@ -6,14 +6,18 @@ let PATH = {
   }
 };
 
+//*** HELPER ANIMATION
+const _revealVert = (bottomY, easing, delay) => ({
+  translateY: [bottomY, 0],
+  opacity: [0, 1],
+  easing: easing,
+  delay: anime.stagger(delay)
+});
+
 //*** ICONS ANIMATIONS
 
 //gift icon animation
-
 const giftIconAnimation = anime({
   targets: [`${PATH.giftIcon.gift}`, `${PATH.giftIcon.egg}`],
-  translateY: [150, 0],
-  opacity: [0, 1],
-  easing: "easeOutElastic",
-  delay: anime.stagger(100)
+  ..._revealVert(150, "easeOutElastic", 100)
 });
