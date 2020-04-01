@@ -87,15 +87,18 @@ body {
 }
 
 .header__title {
-  margin-bottom: 30px;
-
   font: {
     size: 2.1rem;
     weight: 600;
   }
 }
 
-.subtitle {
+.header__subtitle {
+  margin-bottom: 30px;
+
+  font: {
+    weight: 600;
+  }
   text-align: center;
 }
 
@@ -106,8 +109,30 @@ body {
 }
 
 .content__inner {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(5, 100px);
+  grid-gap: 60px;
+  justify-content: center;
   margin-top: 50px;
+}
+
+.icon-block {
+  width: 100px;
+
+  text-align: center;
+
+  .icon {
+    width: 100%;
+    height: 100px;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+}
+
+.icon-block__replay {
+  margin-top: 15px;
 }
