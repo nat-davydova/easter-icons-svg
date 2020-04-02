@@ -3,7 +3,8 @@ let PATH = {
     icon: ".gift-icon",
     gift: ".gift-icon__gift",
     egg: ".gift-icon__egg"
-  }
+  },
+  chickIcon: ".chick-icon"
 };
 
 //*** HELPER ANIMATION
@@ -48,6 +49,37 @@ const giftIconAnimation = anime({
     giftEggAnimation = anime({
       targets: `${PATH.giftIcon.egg}`,
       ..._shiver()
+    });
+  }
+});
+
+//chick icon animation
+let chickJumpAnimation;
+
+const jumpKeyframes = {
+  scaleY: [
+    { value: 0.9, duration: 170 },
+    { value: 1, duration: 170, delay: 120 }
+  ],
+  translateY: [
+    { value: -20, duration: 170, delay: 170 },
+    { value: 0, duration: 170, delay: 220 }
+  ]
+};
+
+const chickIconAnimation = anime({
+  targets: `${PATH.chickIcon}`,
+  ..._revealVert(150, "easeOutElastic", 100),
+
+  complete: function () {
+    const chick = document.querySelector(PATH.chickIcon);
+    chick.style.transformOrigin = "center bottom";
+
+    chickJumpAnimation = anime({
+      targets: `${PATH.chickIcon}`,
+      ...jumpKeyframes,
+      loop: true,
+      easing: "linear"
     });
   }
 });
