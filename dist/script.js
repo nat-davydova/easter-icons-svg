@@ -69,7 +69,7 @@ const jumpKeyframes = {
 
 const chickIconAnimation = anime({
   targets: `${PATH.chickIcon}`,
-  ..._revealVert(150, "easeOutElastic", 100),
+  ..._revealVert(25, "easeOutElastic", 100),
 
   complete: function () {
     const chick = document.querySelector(PATH.chickIcon);
@@ -106,5 +106,19 @@ giftReplay.addEventListener("click", function () {
 
   giftEggAnimation,
   giftIconAnimation);
+
+});
+
+//gift icon replay init
+const chickReplay = document.querySelector(PATH.chickIcon).nextElementSibling;
+
+chickReplay.addEventListener("click", function () {
+  replay(
+  {
+    initTargets: `${PATH.chickIcon}`,
+    initValues: { opacity: 0 } },
+
+  chickJumpAnimation,
+  chickIconAnimation);
 
 });
