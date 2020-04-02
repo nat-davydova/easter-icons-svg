@@ -1,124 +1,141 @@
-// let PATH = {
-//   giftIcon: {
-//     icon: ".gift-icon",
-//     gift: ".gift-icon__gift",
-//     egg: ".gift-icon__egg"
-//   },
-//   chickIcon: ".chick-icon"
-// };
+let PATH = {
+  giftIcon: {
+    icon: ".gift-icon",
+    gift: ".gift-icon__gift",
+    egg: ".gift-icon__egg" },
 
-// //*** HELPER ANIMATION
-// const _revealVert = (bottomY, easing, delay) => ({
-//   translateY: [bottomY, 0],
-//   opacity: [0, 1],
-//   easing: easing,
-//   delay: anime.stagger(delay)
-// });
+  chickIcon: ".chick-icon",
+  basketIcon: {
+    icon: ".basket-icon",
+    egg1: ".basket-icon .egg1",
+    egg2: ".basket-icon .egg2" } };
 
-// const _shiver = () => ({
-//   keyframes: [
-//     { rotate: -10 },
-//     { rotate: 10 },
-//     { rotate: 0 },
-//     { rotate: 0 },
-//     { rotate: 0 },
-//     { rotate: 0 },
-//     { rotate: 0 },
-//     { rotate: 0 },
-//     { rotate: 0 },
-//     { rotate: 0 }
-//   ],
-//   loop: true,
-//   easing: "linear",
-//   duration: 1200
-// });
 
-// //*** ICONS ANIMATIONS
 
-// //gift icon animation
-// let giftEggAnimation;
+//*** HELPER ANIMATION
+const _revealVert = (bottomY, easing, delay) => ({
+  translateY: [bottomY, 0],
+  opacity: [0, 1],
+  easing: easing,
+  delay: anime.stagger(delay) });
 
-// const giftIconAnimation = anime({
-//   targets: [`${PATH.giftIcon.gift}`, `${PATH.giftIcon.egg}`],
-//   ..._revealVert(150, "easeOutElastic", 100),
 
-//   complete: function () {
-//     const egg = document.querySelector(PATH.giftIcon.egg);
-//     egg.style.transformOrigin = "75% bottom";
+const _shiver = () => ({
+  keyframes: [
+  { rotate: -10 },
+  { rotate: 10 },
+  { rotate: 0 },
+  { rotate: 0 },
+  { rotate: 0 },
+  { rotate: 0 },
+  { rotate: 0 },
+  { rotate: 0 },
+  { rotate: 0 },
+  { rotate: 0 }],
 
-//     giftEggAnimation = anime({
-//       targets: `${PATH.giftIcon.egg}`,
-//       ..._shiver()
-//     });
-//   }
-// });
+  loop: true,
+  easing: "linear",
+  duration: 1200 });
 
-// //chick icon animation
-// let chickJumpAnimation;
 
-// const jumpKeyframes = {
-//   scaleY: [
-//     { value: 0.9, duration: 170 },
-//     { value: 1, duration: 170, delay: 120 }
-//   ],
-//   translateY: [
-//     { value: -20, duration: 170, delay: 170 },
-//     { value: 0, duration: 170, delay: 220 }
-//   ]
-// };
+//*** ICONS ANIMATIONS
 
-// const chickIconAnimation = anime({
-//   targets: `${PATH.chickIcon}`,
-//   ..._revealVert(25, "easeOutElastic", 100),
+//gift icon animation
+let giftEggAnimation;
 
-//   complete: function () {
-//     const chick = document.querySelector(PATH.chickIcon);
-//     chick.style.transformOrigin = "center bottom";
+const giftIconAnimation = anime({
+  targets: [`${PATH.giftIcon.gift}`, `${PATH.giftIcon.egg}`],
+  ..._revealVert(150, "easeOutElastic", 100),
 
-//     chickJumpAnimation = anime({
-//       targets: `${PATH.chickIcon}`,
-//       ...jumpKeyframes,
-//       loop: true,
-//       easing: "linear"
-//     });
-//   }
-// });
+  complete: function () {
+    const egg = document.querySelector(PATH.giftIcon.egg);
+    egg.style.transformOrigin = "75% bottom";
 
-// //*** REPLAYS INIT
+    giftEggAnimation = anime({
+      targets: `${PATH.giftIcon.egg}`,
+      ..._shiver() });
 
-// //common replay function
-// const replay = ({ initTarget, initValues }, cbPause, cbRestart) => {
-//   anime.set(initTarget, { ...initValues });
+  } });
 
-//   cbPause.pause();
-//   cbRestart.restart();
-// };
 
-// //gift icon replay init
-// const giftReplay = document.querySelector(PATH.giftIcon.icon)
-//   .nextElementSibling;
+//chick icon animation
+let chickJumpAnimation;
 
-// giftReplay.addEventListener("click", function () {
-//   replay(
-//     {
-//       initTargets: [`${PATH.giftIcon.gift}`, `${PATH.giftIcon.egg}`],
-//       initValues: { opacity: 0 }
-//     },
-//     giftEggAnimation,
-//     giftIconAnimation
-//   );
-// });
+const jumpKeyframes = {
+  scaleY: [
+  { value: 0.9, duration: 170 },
+  { value: 1, duration: 170, delay: 120 }],
 
-// //gift icon replay init
-// const chickReplay = document.querySelector(PATH.chickIcon).nextElementSibling;
+  translateY: [
+  { value: -20, duration: 170, delay: 170 },
+  { value: 0, duration: 170, delay: 220 }] };
 
-// chickReplay.addEventListener("click", function () {
-//   replay(
-//     {
-//       initTargets: `${PATH.chickIcon}`,
-//       initValues: { opacity: 0 }
-//     },
-//     chickJumpAnimation,
-//     chickIconAnimation
-//   );
-// });
+
+
+const chickIconAnimation = anime({
+  targets: `${PATH.chickIcon}`,
+  ..._revealVert(25, "easeOutElastic", 100),
+
+  complete: function () {
+    const chick = document.querySelector(PATH.chickIcon);
+    chick.style.transformOrigin = "center bottom";
+
+    chickJumpAnimation = anime({
+      targets: `${PATH.chickIcon}`,
+      ...jumpKeyframes,
+      loop: true,
+      easing: "linear" });
+
+  } });
+
+
+//basket animation
+let eggsReveal;
+
+const basketIconAnimation = anime({
+  targets: `${PATH.basketIcon.icon}`,
+  ..._revealVert(25, "easeOutElastic", 100),
+
+  complete: function () {
+    eggsReveal = anime({});
+  } });
+
+
+//*** REPLAYS INIT
+
+//common replay function
+const replay = ({ initTarget, initValues }, cbPause, cbRestart) => {
+  anime.set(initTarget, { ...initValues });
+
+  cbPause.pause();
+  cbRestart.restart();
+};
+
+//gift icon replay init
+const giftReplay = document.querySelector(PATH.giftIcon.icon).
+nextElementSibling;
+
+giftReplay.addEventListener("click", function () {
+  replay(
+  {
+    initTargets: [`${PATH.giftIcon.gift}`, `${PATH.giftIcon.egg}`],
+    initValues: { opacity: 0 } },
+
+  giftEggAnimation,
+  giftIconAnimation);
+
+});
+
+//gift icon replay init
+const chickReplay = document.querySelector(PATH.chickIcon).nextElementSibling;
+
+chickReplay.addEventListener("click", function () {
+  replay(
+  {
+    initTargets: `${PATH.chickIcon}`,
+    initValues: { opacity: 0 } },
+
+  chickJumpAnimation,
+  chickIconAnimation);
+
+});
