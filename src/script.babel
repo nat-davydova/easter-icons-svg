@@ -7,8 +7,8 @@ let PATH = {
   chickIcon: ".chick-icon",
   basketIcon: {
     icon: ".basket-icon",
-    egg1: ".basket-icon .egg1",
-    egg2: ".basket-icon .egg2"
+    egg1: ".basket-icon .egg-1",
+    egg2: ".basket-icon .egg-2"
   }
 };
 
@@ -90,14 +90,18 @@ const chickIconAnimation = anime({
 });
 
 //basket animation
-let eggsReveal;
+let eggsRevealAnimation;
 
 const basketIconAnimation = anime({
   targets: `${PATH.basketIcon.icon}`,
   ..._revealVert(25, "easeOutElastic", 100),
 
   complete: function () {
-    eggsReveal = anime({});
+    eggsRevealAnimation = anime({
+      targets: [`${PATH.basketIcon.egg1}`, `${PATH.basketIcon.egg2}`],
+      ..._revealVert(50, "easeOutElastic", 150),
+      loop: true
+    });
   }
 });
 
@@ -126,7 +130,7 @@ giftReplay.addEventListener("click", function () {
   );
 });
 
-//gift icon replay init
+//chick icon replay init
 const chickReplay = document.querySelector(PATH.chickIcon).nextElementSibling;
 
 chickReplay.addEventListener("click", function () {
@@ -137,5 +141,20 @@ chickReplay.addEventListener("click", function () {
     },
     chickJumpAnimation,
     chickIconAnimation
+  );
+});
+
+//basket icon replay init
+const basketReplay = document.querySelector(PATH.basketIcon.icon)
+  .nextElementSibling;
+
+basketReplay.addEventListener("click", function () {
+  replay(
+    {
+      initTargets: `${PATH.basketIcon.icon}`,
+      initValues: { opacity: 0 }
+    },
+    eggsRevealAnimation,
+    basketIconAnimation
   );
 });
