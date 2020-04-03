@@ -164,10 +164,12 @@ const paintingIconAnimation = anime({
 //*** REPLAYS INIT
 
 //common replay function
-const replay = ({ initTarget, initValues }, cbPause, cbRestart) => {
+const replay = ({ initTarget, initValues }, cbPauseArr, cbRestart) => {
   anime.set(initTarget, { ...initValues });
 
-  cbPause.pause();
+  cbPauseArr.forEach(elem => {
+    elem.pause();
+  });
   cbRestart.restart();
 };
 
@@ -181,7 +183,7 @@ giftReplay.addEventListener("click", function () {
     initTargets: [`${PATH.giftIcon.gift}`, `${PATH.giftIcon.egg}`],
     initValues: { opacity: 0 } },
 
-  giftEggAnimation,
+  [giftEggAnimation],
   giftIconAnimation);
 
 });
@@ -195,7 +197,7 @@ chickReplay.addEventListener("click", function () {
     initTargets: `${PATH.chickIcon}`,
     initValues: { opacity: 0 } },
 
-  chickJumpAnimation,
+  [chickJumpAnimation],
   chickIconAnimation);
 
 });
@@ -210,7 +212,22 @@ basketReplay.addEventListener("click", function () {
     initTargets: `${PATH.basketIcon.icon}`,
     initValues: { opacity: 0 } },
 
-  eggsRevealAnimation,
+  [eggsRevealAnimation],
   basketIconAnimation);
+
+});
+
+//painting icon replay init
+const paintingReplay = document.querySelector(PATH.paintingIcon.icon).
+nextElementSibling;
+
+paintingReplay.addEventListener("click", function () {
+  replay(
+  {
+    initTargets: `${PATH.paintingIcon.eggTop}`,
+    initValues: { opacity: 0 } },
+
+  [paintingAnimation, paintedPartAnimation],
+  paintingIconAnimation);
 
 });
