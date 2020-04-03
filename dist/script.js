@@ -16,7 +16,14 @@ let PATH = {
     brush: ".painting-icon__brush",
     eggTop: ".painting-icon__egg-top",
     eggTopParts: ".painting-icon__egg-top path",
-    eggTopColored: ".painting-icon__egg-top .egg-top__main" } };
+    eggTopColored: ".painting-icon__egg-top .egg-top__main" },
+
+  hatchIcon: {
+    icon: ".hatch-icon",
+    rabbit: ".hatch-icon__rabbit",
+    rabbitPaws: ".hatch-icon__rabbit .rabbit-paws",
+    rabbitHead: ".hatch-icon__rabbit .rabbit-head",
+    egg: ".hatch-icon__egg" } };
 
 
 
@@ -45,6 +52,11 @@ const _shiver = () => ({
   easing: "linear",
   duration: 1200 });
 
+
+const _hideElem = elemPath => {
+  const elem = document.querySelector(elemPath);
+  elem.style.opacity = 0;
+};
 
 //*** ICONS ANIMATIONS
 
@@ -117,8 +129,7 @@ const basketIconAnimation = anime({
 let paintingAnimation;
 let paintedPartAnimation;
 
-const eggTop = document.querySelector(PATH.paintingIcon.eggTop);
-eggTop.style.opacity = 0;
+_hideElem(PATH.paintingIcon.eggTop);
 
 const brushKeyframes = {
   translateX: [
@@ -224,7 +235,7 @@ const paintingReplay = document.querySelector(PATH.paintingIcon.icon).
 nextElementSibling;
 
 paintingReplay.addEventListener("click", function () {
-  eggTop.style.opacity = 0;
+  _hideElem(PATH.paintingIcon.eggTop);
   replay(
   {
     initTargets: `${PATH.paintingIcon.eggTop}`,
