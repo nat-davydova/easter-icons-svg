@@ -195,7 +195,7 @@ const jumpRabbitKeyframes = {
 
 const hatchIconAnimation = anime({
   targets: `${PATH.hatchIcon.icon}`,
-  ..._revealVert(150, "easeOutElastic", 100),
+  ..._revealVert(25, "easeOutElastic", 100),
 
   complete: function () {
     _showElem(PATH.hatchIcon.rabbit);
@@ -278,5 +278,21 @@ paintingReplay.addEventListener("click", function () {
     },
     [paintingAnimation, paintedPartAnimation],
     paintingIconAnimation
+  );
+});
+
+//painting icon replay init
+const hatchReplay = document.querySelector(PATH.hatchIcon.icon)
+  .nextElementSibling;
+
+hatchReplay.addEventListener("click", function () {
+  _hideElem(PATH.hatchIcon.rabbit);
+  replay(
+    {
+      initTargets: `${PATH.hatchIcon.icon}`,
+      initValues: { opacity: 0 }
+    },
+    [jumpRabbitAnimation],
+    hatchIconAnimation
   );
 });
