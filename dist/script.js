@@ -21,8 +21,8 @@ let PATH = {
   hatchIcon: {
     icon: ".hatch-icon",
     rabbit: ".hatch-icon__rabbit",
-    rabbitPaws: ".hatch-icon__rabbit .rabbit-paws",
-    rabbitHead: ".hatch-icon__rabbit .rabbit-head",
+    rabbitPaws: ".hatch-icon__rabbit-paws",
+    rabbitHead: ".hatch-icon__rabbit-head",
     egg: ".hatch-icon__egg" } };
 
 
@@ -56,6 +56,11 @@ const _shiver = () => ({
 const _hideElem = elemPath => {
   const elem = document.querySelector(elemPath);
   elem.style.opacity = 0;
+};
+
+const _showElem = elemPath => {
+  const elem = document.querySelector(elemPath);
+  elem.style.opacity = 1;
 };
 
 //*** ICONS ANIMATIONS
@@ -168,6 +173,36 @@ const paintingIconAnimation = anime({
     paintedPartAnimation = anime({
       targets: `${PATH.paintingIcon.eggTop}`,
       ...paintKeyframes,
+      easing: "linear",
+      loop: true });
+
+  } });
+
+
+//hatch icon animation
+let jumpRabbitAnimation;
+
+_hideElem(PATH.hatchIcon.rabbit);
+
+const jumpRabbitKeyframes = {
+  translateY: [
+  { value: 50, duration: 50, delay: 100 },
+  { value: -90, duration: 150, delay: 100 },
+  { value: 0, duration: 100, delay: 100 },
+  { value: 0, duration: 100, delay: 1200 }] };
+
+
+
+const hatchIconAnimation = anime({
+  targets: `${PATH.hatchIcon.icon}`,
+  ..._revealVert(150, "easeOutElastic", 100),
+
+  complete: function () {
+    _showElem(PATH.hatchIcon.rabbit);
+
+    jumpRabbitAnimation = anime({
+      targets: `${PATH.hatchIcon.rabbit}`,
+      ...jumpRabbitKeyframes,
       easing: "linear",
       loop: true });
 
