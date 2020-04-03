@@ -122,21 +122,23 @@ eggTop.style.opacity = 0;
 
 const brushKeyframes = {
   translateX: [
-  { value: -150, duration: 150, delay: 1800 },
+  { value: -150, duration: 150 },
   { value: -180, duration: 150, delay: 100 },
   { value: 0, duration: 150, delay: 100 },
-  { value: 0, duration: 150, delay: 350 }],
+  { value: 0, duration: 150, delay: 1850 }],
 
   translateY: [
-  { value: -160, duration: 150, delay: 1800 },
-  { value: 0, duration: 150, delay: 100 }] };
+  { value: -160, duration: 150 },
+  { value: 0, duration: 150, delay: 100 },
+  { value: 0, duration: 150, delay: 1800 }] };
 
 
 
 const paintKeyframes = {
   opacity: [
-  { value: 1, duration: 200, delay: 1950 },
-  { value: 0, duration: 200, delay: 600 }] };
+  { value: 1, duration: 200 },
+  { value: 0, duration: 200, delay: 900 },
+  { value: 0, duration: 150, delay: 1200 }] };
 
 
 
@@ -155,7 +157,7 @@ const paintingIconAnimation = anime({
     paintedPartAnimation = anime({
       targets: `${PATH.paintingIcon.eggTop}`,
       ...paintKeyframes,
-      easing: "easeInQuad",
+      easing: "linear",
       loop: true });
 
   } });
@@ -222,6 +224,7 @@ const paintingReplay = document.querySelector(PATH.paintingIcon.icon).
 nextElementSibling;
 
 paintingReplay.addEventListener("click", function () {
+  eggTop.style.opacity = 0;
   replay(
   {
     initTargets: `${PATH.paintingIcon.eggTop}`,
