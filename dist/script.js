@@ -114,14 +114,51 @@ const basketIconAnimation = anime({
 
 
 //painting icon animation
+let paintingAnimation;
+let paintedPartAnimation;
+
 const eggTop = document.querySelector(PATH.paintingIcon.eggTop);
 eggTop.style.opacity = 0;
+
+const brushKeyframes = {
+  translateX: [
+  { value: -150, duration: 150, delay: 1800 },
+  { value: -180, duration: 150, delay: 100 },
+  { value: 0, duration: 150, delay: 100 },
+  { value: 0, duration: 150, delay: 350 }],
+
+  translateY: [
+  { value: -160, duration: 150, delay: 1800 },
+  { value: 0, duration: 150, delay: 100 }] };
+
+
+
+const paintKeyframes = {
+  opacity: [
+  { value: 1, duration: 200, delay: 1950 },
+  { value: 0, duration: 200, delay: 600 }] };
+
+
 
 const paintingIconAnimation = anime({
   targets: `${PATH.paintingIcon.allComponents}`,
   ..._revealVert(150, "easeOutElastic", 100),
 
-  complete: function () {} });
+  complete: function () {
+    paintingAnimation = anime({
+      targets: `${PATH.paintingIcon.brush}`,
+      ...brushKeyframes,
+      easing: "linear",
+      loop: true });
+
+
+    paintedPartAnimation = anime({
+      targets: `${PATH.paintingIcon.eggTop}`,
+      ...paintKeyframes,
+      easing: "easeInQuad",
+      loop: true });
+
+  } });
 
 
 //*** REPLAYS INIT
