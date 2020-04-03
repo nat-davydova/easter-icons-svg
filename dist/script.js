@@ -8,8 +8,9 @@ let PATH = {
   basketIcon: {
     icon: ".basket-icon",
     egg1: ".basket-icon .egg-1",
-    egg2: ".basket-icon .egg-2" } };
+    egg2: ".basket-icon .egg-2" },
 
+  paintingIcon: {} };
 
 
 //*** HELPER ANIMATION
