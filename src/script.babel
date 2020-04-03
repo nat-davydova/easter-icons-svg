@@ -7,10 +7,17 @@ let PATH = {
   chickIcon: ".chick-icon",
   basketIcon: {
     icon: ".basket-icon",
-    egg1: ".basket-icon .egg-1",
-    egg2: ".basket-icon .egg-2"
+    egg1: ".basket-icon__egg-1",
+    egg2: ".basket-icon__egg-2"
   },
-  paintingIcon: {}
+  paintingIcon: {
+    icon: ".painting-icon",
+    allComponents: ".painting-icon svg > g",
+    brush: ".painting-icon__brush",
+    eggTop: ".painting-icon__egg-top",
+    eggTopParts: ".painting-icon__egg-top path",
+    eggTopColored: ".painting-icon__egg-top .egg-top__main"
+  }
 };
 
 //*** HELPER ANIMATION
@@ -90,7 +97,7 @@ const chickIconAnimation = anime({
   }
 });
 
-//basket animation
+//basket icon animation
 let eggsRevealAnimation;
 
 const basketIconAnimation = anime({
@@ -104,6 +111,17 @@ const basketIconAnimation = anime({
       loop: true
     });
   }
+});
+
+//painting icon animation
+const eggTop = document.querySelector(PATH.paintingIcon.eggTop);
+eggTop.style.opacity = 0;
+
+const paintingIconAnimation = anime({
+  targets: `${PATH.paintingIcon.allComponents}`,
+  ..._revealVert(150, "easeOutElastic", 100),
+
+  complete: function () {}
 });
 
 //*** REPLAYS INIT
