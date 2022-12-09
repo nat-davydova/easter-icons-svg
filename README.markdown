@@ -3,7 +3,7 @@
 
 [Check the Demo](https://codepen.io/nat-davydova/pen/dyorEMm)
 
-<img src="http://natali-davydova.me/assets/img/easter-icons-svg/sample.png" width="650" />
+<img src="http://eisenpar.com/portfolio2/assets/img/easter-icons-svg/sample.png" width="650" />
 
 - HTML/Pug
 - SCSS/CSS
